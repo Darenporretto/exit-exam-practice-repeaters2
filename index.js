@@ -4,7 +4,7 @@ Directions: Declare a let variable called temperatures and assign it an array
 containing these temperatures: 42, 75, 67, 94.
  */
 
-let temperatures;
+let temperatures = [42, 75, 67, 94];
 
 /////////////////////// PROBLEM #2 ///////////////////////
 /*
@@ -14,7 +14,13 @@ that array in reverse only if the temperature is greater than 72.
  */
 
 let printTempsInReverse = function() {
-  
+  //iterate through in reverse
+  for (let i = temperatures.length - 1; i >= 0; i--) {
+    let temp = temperatures[i];
+    if (temp > 72) {
+      console.log(temp);
+    }
+  }
 };
 
 /////////////////////// PROBLEM #3 ///////////////////////
@@ -24,7 +30,11 @@ pairs. The keys can be called whatever you like, and the values should be
 strings.
  */
 
-let sampleObject;
+let sampleObject = {
+  title: 'The Shining',
+  author: 'Stephen King',
+  genre: 'Horror'
+};
 
 
 /////////////////////// PROBLEM #4 ///////////////////////
@@ -34,8 +44,17 @@ of an object. This function should return an array of only the values at each
 key of this object that are strings.
  */
 
-let getStringValues = function() {
-
+let getStringValues = function(object) {
+  //initialize array for ne string values
+  let stringValues = [];
+  //iterate over objects keys
+  for (let key in object) {
+    //check if it is a string
+    if (typeof object[key] === 'string') {
+      stringValues.push(object[key]);//add to the array
+    }
+  }
+  return stringValues;
 };
 
 /////////////////////// PROBLEM #5 ///////////////////////
@@ -55,8 +74,16 @@ var person = {
 getDashKeys(person) => ["marriage-status", "favorite-John-Carpenter-film"];
  */
 
-let getDashKeys = function() {
-
+let getDashKeys = function(object) {
+  let dashKeys = [];
+  //iterate over object
+  for (let key in object) {
+    //check for dashes in key
+    if (key.includes('-')) {
+      dashKeys.push(key);//add to array
+    }
+  }
+  return dashKeys;
 };
 
 /////////////////////// PROBLEM #6 ///////////////////////
@@ -70,8 +97,12 @@ assign it value. If the key does already exist, the new value should NOT be
 applied. Finally, this function should return the object.
  */
 
-let addKeyAndValue = function(){
-  
+let addKeyAndValue = function(object, key, value){
+  //check if key already exists
+  if (!(key in object)) {
+    object[key] = value;//add key and assign value
+  }
+  return object;
 };
 
 /////////////////////// DATA SET //////////////////////////
@@ -102,8 +133,9 @@ native filter method to return a new array of only the movies that were made
 between 1980 and 1989.
  */
 
-let get80sFilms = function() {
-  
+let get80sFilms = function(movies) {
+  //filter to return 80s movies
+  return movies.filter(movie => movie.year >= 1980 && movie.year <= 1989);
 };
 
 /////////////////////// PROBLEM #7 ///////////////////////
@@ -114,7 +146,9 @@ reduce method to return the average of the years.
  */
 
 let getYearAverage = function(movies) {
-
+  //redude to sum the years divide by length to get avg
+  const totalYears = movies.reduce((sum, movie) => sum + movie.year, 0);
+  return totalYears / movies.length; //get avg
 };
 
 
@@ -137,7 +171,13 @@ nested object like above. This function return the sum of all of the value
 properties. Use recursion.
  */
 
-let getSum = function() {
-  
+let getSum = function(object) {
+  //base
+  if (object === null) {
+    return 0;
+  }
+  //recursion
+  return object.value + getSum(object.node);
+
 };
 
