@@ -178,6 +178,6 @@ let getSum = function(object) {
   }
   //recursion
   return object.value + getSum(object.node);
-
+  //sums the value current and the value from nested node
 };
 
